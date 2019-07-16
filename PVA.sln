@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.168
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PVA.Web", "PVA.Web\PVA.Web.csproj", "{A54C8D2B-D46E-48C7-AFD8-5B80BA64756C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A54C8D2B-D46E-48C7-AFD8-5B80BA64756C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A54C8D2B-D46E-48C7-AFD8-5B80BA64756C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A54C8D2B-D46E-48C7-AFD8-5B80BA64756C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A54C8D2B-D46E-48C7-AFD8-5B80BA64756C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2E107A07-5896-4646-AF2A-48729F9EC659}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PhysicalVerification_HUL_NewModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="FARToBeVerified">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PlantID" Type="varchar" MaxLength="50" />
+          <Property Name="AssetIDSubNo" Type="nvarchar" MaxLength="255" />
+          <Property Name="Process" Type="nvarchar" MaxLength="255" />
+          <Property Name="Product" Type="nvarchar" MaxLength="255" />
+          <Property Name="Pack" Type="nvarchar" MaxLength="255" />
+          <Property Name="EquipmentDetails" Type="nvarchar" MaxLength="255" />
+          <Property Name="AssetDescription" Type="nvarchar" MaxLength="255" />
+          <Property Name="InstallationStatus" Type="varchar" MaxLength="50" />
+          <Property Name="AssetImage" Type="varchar" MaxLength="50" />
+          <Property Name="BarCodeImage" Type="varchar" MaxLength="50" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="ApprovedBy" Type="varchar" MaxLength="50" />
+          <Property Name="DeviceID" Type="varchar" MaxLength="50" />
+          <Property Name="ApprovedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="100" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="100" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="EnteredOnMachineID" Type="varchar" MaxLength="50" />
+          <Property Name="ExeVersionNo" Type="varchar" MaxLength="50" />
+          <Property Name="ModuleName" Type="varchar" MaxLength="50" />
+          <Property Name="APSyncModifiedBy" Type="varchar" MaxLength="50" />
+          <Property Name="SysCreatedDateTime" Type="datetime" />
+          <Property Name="SysModifiedDateTime" Type="datetime" />
+          <Property Name="AssetQRCode" Type="varchar" MaxLength="50" />
+          <Property Name="VerifiedBy" Type="varchar" MaxLength="50" />
+          <Property Name="Remarks" Type="varchar(max)" />
+          <Property Name="VerifiedOn" Type="datetime" />
+          <Property Name="Vendor" Type="varchar" MaxLength="100" />
+          <Property Name="RejectionRemarks" Type="varchar" MaxLength="500" />
+          <Property Name="Type" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="PlantAreaMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PLANT" Type="varchar" MaxLength="255" />
+          <Property Name="BA" Type="varchar" MaxLength="255" />
+          <Property Name="PLANT_NAME" Type="varchar" MaxLength="255" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="ApprovedBy" Type="varchar" MaxLength="50" />
+          <Property Name="DeviceID" Type="varchar" MaxLength="50" />
+          <Property Name="ApprovedOn" Type="datetime" />
+          <Property Name="StartedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CompletedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="100" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="100" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="EnteredOnMachineID" Type="varchar" MaxLength="50" />
+          <Property Name="ExeVersionNo" Type="varchar" MaxLength="50" />
+          <Property Name="ModuleName" Type="varchar" MaxLength="50" />
+          <Property Name="APSyncModifiedBy" Type="varchar" MaxLength="50" />
+          <Property Name="SysCreatedDateTime" Type="datetime" />
+          <Property Name="SysModifiedDateTime" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="PhysicalVerification_HUL_NewModelStoreContainer">
+          <EntitySet Name="FARToBeVerified" EntityType="Self.FARToBeVerified" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlantAreaMaster" EntityType="Self.PlantAreaMaster" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PhysicalVerification_HUL_NewModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="FARToBeVerified">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PlantID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AssetIDSubNo" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Process" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Product" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Pack" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="EquipmentDetails" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="AssetDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="InstallationStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AssetImage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BarCodeImage" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApprovedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DeviceID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApprovedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="EnteredOnMachineID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ExeVersionNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModuleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="APSyncModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SysCreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="SysModifiedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="AssetQRCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VerifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="VerifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="Vendor" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RejectionRemarks" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PlantAreaMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PLANT" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="BA" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="PLANT_NAME" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApprovedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DeviceID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApprovedOn" Type="DateTime" Precision="3" />
+          <Property Name="StartedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CompletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="EnteredOnMachineID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ExeVersionNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModuleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="APSyncModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SysCreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="SysModifiedDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityContainer Name="PhysicalVerification_HUL_NewEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="FARToBeVerifieds" EntityType="Self.FARToBeVerified" />
+          <EntitySet Name="PlantAreaMasters" EntityType="Self.PlantAreaMaster" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PhysicalVerification_HUL_NewModelStoreContainer" CdmEntityContainer="PhysicalVerification_HUL_NewEntities">
+          <EntitySetMapping Name="FARToBeVerifieds">
+            <EntityTypeMapping TypeName="PhysicalVerification_HUL_NewModel.FARToBeVerified">
+              <MappingFragment StoreEntitySet="FARToBeVerified">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PlantID" ColumnName="PlantID" />
+                <ScalarProperty Name="AssetIDSubNo" ColumnName="AssetIDSubNo" />
+                <ScalarProperty Name="Process" ColumnName="Process" />
+                <ScalarProperty Name="Product" ColumnName="Product" />
+                <ScalarProperty Name="Pack" ColumnName="Pack" />
+                <ScalarProperty Name="EquipmentDetails" ColumnName="EquipmentDetails" />
+                <ScalarProperty Name="AssetDescription" ColumnName="AssetDescription" />
+                <ScalarProperty Name="InstallationStatus" ColumnName="InstallationStatus" />
+                <ScalarProperty Name="AssetImage" ColumnName="AssetImage" />
+                <ScalarProperty Name="BarCodeImage" ColumnName="BarCodeImage" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="ApprovedOn" ColumnName="ApprovedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="EnteredOnMachineID" ColumnName="EnteredOnMachineID" />
+                <ScalarProperty Name="ExeVersionNo" ColumnName="ExeVersionNo" />
+                <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+                <ScalarProperty Name="APSyncModifiedBy" ColumnName="APSyncModifiedBy" />
+                <ScalarProperty Name="SysCreatedDateTime" ColumnName="SysCreatedDateTime" />
+                <ScalarProperty Name="SysModifiedDateTime" ColumnName="SysModifiedDateTime" />
+                <ScalarProperty Name="AssetQRCode" ColumnName="AssetQRCode" />
+                <ScalarProperty Name="VerifiedBy" ColumnName="VerifiedBy" />
+                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+                <ScalarProperty Name="VerifiedOn" ColumnName="VerifiedOn" />
+                <ScalarProperty Name="Vendor" ColumnName="Vendor" />
+                <ScalarProperty Name="RejectionRemarks" ColumnName="RejectionRemarks" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlantAreaMasters">
+            <EntityTypeMapping TypeName="PhysicalVerification_HUL_NewModel.PlantAreaMaster">
+              <MappingFragment StoreEntitySet="PlantAreaMaster">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PLANT" ColumnName="PLANT" />
+                <ScalarProperty Name="BA" ColumnName="BA" />
+                <ScalarProperty Name="PLANT_NAME" ColumnName="PLANT_NAME" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="ApprovedOn" ColumnName="ApprovedOn" />
+                <ScalarProperty Name="StartedBy" ColumnName="StartedBy" />
+                <ScalarProperty Name="CompletedBy" ColumnName="CompletedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="EnteredOnMachineID" ColumnName="EnteredOnMachineID" />
+                <ScalarProperty Name="ExeVersionNo" ColumnName="ExeVersionNo" />
+                <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+                <ScalarProperty Name="APSyncModifiedBy" ColumnName="APSyncModifiedBy" />
+                <ScalarProperty Name="SysCreatedDateTime" ColumnName="SysCreatedDateTime" />
+                <ScalarProperty Name="SysModifiedDateTime" ColumnName="SysModifiedDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
