@@ -8,7 +8,9 @@
     }
 
     .clsPending {
-        background-color: #c3beb7;
+        /*background-color: #c3beb7;*/
+        background-image: url("/Content/img/GAudit_YellowDot copy.png");
+        BACKGROUND-REPEAT: no-repeat;
     }
 
     .clsVerified {
@@ -58,7 +60,7 @@
                                                                     .Filterable()
                                                                     .NoRecords()
                                                                     .Selectable()
-                                                                    .Events(grid => grid.Change("onGridChange"))
+                                                                    .Events(grid => grid.Change("onGridChange").DataBound("onboundGridPlan"))
                                                                     .DataSource(dataSource => dataSource
                                                                         .Ajax()
                                                                         .ServerOperation(true)
@@ -173,8 +175,14 @@
     }
 
 
+
+    function onboundGridPlan(e) {
+        e.sender.select("tr:eq(1)");
+    }
+
+
     function onDataGridBound(e) {
-        debugger;
+     
 
         var dataView = this.dataSource.view();
         

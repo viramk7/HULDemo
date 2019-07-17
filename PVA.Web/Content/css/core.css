@@ -7086,4 +7086,11 @@ a.panel-title {
 
     .sidebar-default .category-title .sidebarHeader {
         color: #fff !important;
-    }   
+    }
+
+
+.menuimageusermaster {
+    /*background-image: url("/Content/img/Usermaster.png");*/
+    height: 25px;
+    /*width: 50px;*/
+}
