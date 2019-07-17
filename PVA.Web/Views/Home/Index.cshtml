@@ -2,6 +2,22 @@
     ViewBag.Title = "Home Page";
 }
 
+<style>
+    .clsApproved {
+        background-color: #caffca;
+    }
+
+    .clsPending {
+        background-color: #c3beb7;
+    }
+
+    .clsVerified {
+        background-color: #ffe1b4;
+    }
+
+</style>
+
+
 <div class="row">
     <div class="col-xs-12">
         <div class="panel">
@@ -76,7 +92,7 @@
                                         columns.Bound(d => d.InstallationStatus).Width(100);
                                         columns.Bound(d => d.Remarks).Width(100);
                                         columns.Bound(d => d.RejectionRemarks).Width(100);
-                                        
+
                                     })
 
                                     .Pageable(x =>
@@ -84,6 +100,7 @@
                                         x.Refresh(true);
                                         x.PageSizes(new int[] { 25, 50, 100, 200, 500 });
                                     })
+                                    .Events(x => x.DataBound("onDataGridBound"))
                                     .Sortable(sortable => sortable.AllowUnsort(true))
                                     .Filterable()
                                     .NoRecords()
@@ -91,6 +108,7 @@
                                     .Scrollable(scrollable => scrollable.Height(560))
                                     .DataSource(dataSource => dataSource
                                     .Ajax()
+
                                     .ServerOperation(true)
                                     .PageSize(25)
                                     .Model(model =>
@@ -123,7 +141,7 @@
     }
 
     function onAdditionalData(e) {
-        debugger;
+        
         var gview = $("#grid").data("kendoGrid");
         //Getting selected item
         var selectedItem = gview.dataItem(gview.select());
@@ -152,5 +170,42 @@
         });
         window.center();
         window.open();
+    }
+
+
+    function onDataGridBound(e) {
+        debugger;
+
+        var dataView = this.dataSource.view();
+        
+        //for (var i = 0; i < dataView.length; i++) {
+        //    var uid = dataView[i].uid;
+        //    if (dataView[i].Status == "Approved") {
+        //        $("#gridFAR tbody").find("tr[data-uid=" + uid + "]").addClass("clsApproved");
+        //    }
+
+        //    if (dataView[i].Status == "Pending") {
+        //        $("#gridFAR tbody").find("tr[data-uid=" + uid + "]").addClass("clsPending");
+        //    }
+
+        //    if (dataView[i].Status == "Verified") {
+        //        $("#gridFAR tbody").find("tr[data-uid=" + uid + "]").addClass("clsVerified");
+        //    }
+
+        //}
+
+
+        $('#gridFAR td').each(function () { if ($(this).text() == 'Approved') { $(this).addClass('clsApproved') } });
+        $('#gridFAR td').each(function () { if ($(this).text() == 'Pending') { $(this).addClass('clsPending') } });
+        $('#gridFAR td').each(function () { if ($(this).text() == 'Verified') { $(this).addClass('clsVerified') } });
+
+
+
+        //var row = e.row;
+        //var dataItem = e.dataItem;
+
+        //if (dataItem.Status == "Approved") { row.cells[1].bgColor = "#caffca"; }
+        //if (dataItem.Status == "Pending") { row.cells[1].bgColor = "#c3beb7"; }
+        //if (dataItem.Status == "Verified") { row.cells[1].bgColor = "#ffe1b4"; }
     }
 </script>
