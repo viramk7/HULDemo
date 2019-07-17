@@ -1,5 +1,7 @@
 ﻿using OfficeOpenXml;
 using PVA.Web.Data;
+using PVA.Web.Models;
+using PVA.Web.Repository;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
@@ -11,6 +13,21 @@ namespace PVA.Web.Controllers
 {
     public class ImportDataController : Controller
     {
+        #region private variables
+
+        private readonly GenericRepository<FARToBeVerified> _dbRepositoryFAR;
+        private readonly GenericRepository<PlantAreaMaster> _dbRepositoryPlant;
+
+        #endregion
+
+        #region Constructor
+        public ImportDataController()
+        {
+            _dbRepositoryFAR = new GenericRepository<FARToBeVerified>();
+            _dbRepositoryPlant = new GenericRepository<PlantAreaMaster>();
+        }
+        #endregion
+
         // GET: ImportData
         public ActionResult Index()
         {
@@ -18,13 +35,10 @@ namespace PVA.Web.Controllers
         }
 
 
-
         [HttpPost]
-        public ActionResult ImportItems(FARToBeVerified Excelmodel, IEnumerable<HttpPostedFileBase> ItemList)
+        public ActionResult ImportItems(IEnumerable<HttpPostedFileBase> fileImport)
         {
-
-
-            foreach (var item in ItemList)
+            foreach (var item in fileImport)
             {
                 if (item != null)
                 {
@@ -32,26 +46,32 @@ namespace PVA.Web.Controllers
                     ExcelWorksheet workSheet = package.Workbook.Worksheets[1];
                     workSheet.TrimLastEmptyRows();
 
-                    IEnumerable<FARToBeVerified> listFromExcel = GetDataFromExcelStockCheck(workSheet, true);
+                    IEnumerable<ExcelImportModel> listFromExcel = GetDataFromExcelStockCheck(workSheet, true);
 
                     try
                     {
-                        //foreach (var modelItem in listFromExcel)
-                        //{
-                        //    foreach (var brandId in Excelmodel.BrandIds)
-                        //    {
-                        //        bool result = CustomRepository.CheckItemExits(brandId, Excelmodel.CategoryId, modelItem.ITEMDESCRIPTION);
-                        //        if (result == false)
-                        //        {
-                                  
-                        //        }
-
-
-                        //    }
-
-                        //}
-
-                        
+                        foreach(var obj in listFromExcel)
+                        {
+                            if (!string.IsNullOrEmpty(obj.BA))
+                            {
+                                PlantAreaMaster plantAreaMaster = _dbRepositoryPlant.GetEntities().Where(m => m.BA == obj.BA).FirstOrDefault();
+                                if(plantAreaMaster != null)
+                                {
+                                    string plantId = plantAreaMaster.ID;
+                                    FARToBeVerified farObj = new FARToBeVerified();
+                                    farObj.ID = Guid.NewGuid().ToString();
+                                    farObj.PlantID = plantId;
+                                    farObj.AssetIDSubNo = obj.AssetId;
+                                    farObj.Process = obj.Process;
+                                    farObj.Product = obj.Product;
+                                    farObj.Pack = obj.Pack;
+                                    farObj.EquipmentDetails = obj.EquipmentDetails;
+                                    farObj.AssetDescription = obj.AssetDescription;
+                                    farObj.InstallationStatus = obj.InstallationStatus;
+                                    _dbRepositoryFAR.Insert(farObj);
+                                }
+                            }
+                        }
                     }
 
                     catch (DbEntityValidationException dbEx)
@@ -70,21 +90,21 @@ namespace PVA.Web.Controllers
 
                     }
                 }
+
                 else
                 {
-                    return View("ImportItemFromExcel", Excelmodel);
+                    return RedirectToAction("Index", "ImportData");
                 }
             }
 
-
-            return RedirectToAction("Index", "Item");
+            return RedirectToAction("Index", "ImportData");
         }
 
 
 
-        public IEnumerable<FARToBeVerified> GetDataFromExcelStockCheck(ExcelWorksheet workSheet, bool firstRowHeader)
+        public IEnumerable<ExcelImportModel> GetDataFromExcelStockCheck(ExcelWorksheet workSheet, bool firstRowHeader)
         {
-            IList<FARToBeVerified> tblItemModel = new List<FARToBeVerified>();
+            IList<ExcelImportModel> tblItemModel = new List<ExcelImportModel>();
 
             if (workSheet != null)
             {
@@ -102,12 +122,17 @@ namespace PVA.Web.Controllers
                     }
                     else
                     {
-                        //tblItemModel.Add(new ExcelItemDetails
-                        //{
-                        //    ITEMDESCRIPTION = ExcelHelper.ParseWorksheetValue(workSheet, header, rowIndex, "ITEM DESCRIPTION"),
-                        //    HSNCODE = ExcelHelper.ParseWorksheetValue(workSheet, header, rowIndex, "HSN CODE"),
-                        //    UNIT = ExcelHelper.ParseWorksheetValue(workSheet, header, rowIndex, "UNIT")
-                        //});
+                        tblItemModel.Add(new ExcelImportModel
+                        {
+                            BA = ExcelHelper.ParseWorksheetValue(workSheet, header, rowIndex, "Business Area"),
+                            AssetId = ExcelHelper.ParseWorksheetValue(workSheet, header, rowIndex, "Asset ID & Sub no"),
+                            Process = ExcelHelper.ParseWorksheetValue(workSheet, header, rowIndex, "Process"),
+                            Product = ExcelHelper.ParseWorksheetValue(workSheet, header, rowIndex, "Product"),
+                            Pack = ExcelHelper.ParseWorksheetValue(workSheet, header, rowIndex, "Pack"),
+                            EquipmentDetails = ExcelHelper.ParseWorksheetValue(workSheet, header, rowIndex, "Equipment Details"),
+                            AssetDescription = ExcelHelper.ParseWorksheetValue(workSheet, header, rowIndex, "Asset description"),
+                            InstallationStatus = ExcelHelper.ParseWorksheetValue(workSheet, header, rowIndex, "Installation Status")
+                        });
 
                     }
                 }

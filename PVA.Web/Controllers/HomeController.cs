@@ -89,7 +89,7 @@ namespace PVA.Web.Controllers
                     obj.ImageName = masterFAR.AssetImage;
                     if (!string.IsNullOrEmpty(masterFAR.AssetImage))
                     {
-                        string imagePath = string.Format("~/Content/Images/{0}/ComponentImage/{1}", master.PLANT, masterFAR.AssetImage);
+                        string imagePath = string.Format("http://pvapplicationnew.centralus.cloudapp.azure.com/Images/{0}/ComponentImage/{1}", master.PLANT, masterFAR.AssetImage);
                         obj.ImagePath = imagePath;
                     }
                 }
@@ -104,13 +104,21 @@ namespace PVA.Web.Controllers
             {
                 if (!string.IsNullOrEmpty(path))
                 {
-                    string fileExtension = Path.GetExtension(path);
-                    string filePath = Server.MapPath(path);
-                    byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
+                    //string fileExtension = Path.GetExtension(path);
+                    //string filePath = Server.MapPath(path);
+                    //byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
 
-                    var response = new FileContentResult(fileBytes, "image/jpeg");
-                    response.FileDownloadName = "Image.jpeg";
-                    return response;
+                    //var response = new FileContentResult(fileBytes, "image/jpeg");
+                    //response.FileDownloadName = "Image.jpeg";
+                    //return response;
+
+                    using (System.Net.WebClient client = new System.Net.WebClient())
+                    {
+                        byte[] fileBytes = client.DownloadData(path);
+                        var response = new FileContentResult(fileBytes, "image/jpeg");
+                        response.FileDownloadName = "Image.jpeg";
+                        return response;
+                    }
 
                 }
                 else

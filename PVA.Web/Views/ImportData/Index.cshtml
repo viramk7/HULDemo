@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-white">
+            <div class="panel-heading">
+                <h5 class="panel-title">
+                    Import FAR Data
+                </h5>
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm("ImportItems", "ImportData", FormMethod.Post, new { @class = "form form-horizontal", @id = "validation-form", @enctype = "multipart/form-data" }))
+                {
+                    <div class="col-md-12">
+                        <div class="col-md-4">
+                            @(Html.Kendo().Upload()
+                                              .Name("fileImport")
+                                              .Multiple(false)
+                                              .Validation(validation => validation.AllowedExtensions(new string[] { ".xlsx", ".xls" }))
+                            //.Async(a => a
+                            //.Save("SaveUploadFile", "PreCommissioningDetail")
+                            //.AutoUpload(true))
+                            //.Events(e => e.Success("success"))
+                            )
+                        </div>
+                        <div class="col-md-2 mt-5">
+                            <input type="submit" class="btn btn-primary" value="Import File" />
+                        </div>
+                    </div>
+                }
+
+                </div>
+        </div>
+    </div>
+</div>
+

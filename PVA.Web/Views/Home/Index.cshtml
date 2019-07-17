@@ -20,103 +20,108 @@
 
 <div class="row">
     <div class="col-xs-12">
-        <div class="panel">
+        <div class="panel panel-white">
+            <div class="panel-heading">
+                <h5 class="panel-title">
+                    FAR to be Approved
+                </h5>
+            </div>
             <div class="panel-body">
 
                 <div class="col-lg-5">
                     <div>
                         @(Html.Kendo().Grid<PlantAreaMaster>()
-                                                                    .Name("grid")
-                                                                    .Columns(columns =>
-                                                                    {
-                                                                        columns.Bound(d => d.BA);
-                                                                                //columns.Bound(d => d.PLANT);
-                                                                                columns.Bound(d => d.PLANT_NAME);
+                                                                            .Name("grid")
+                                                                            .Columns(columns =>
+                                                                            {
+                                                                                columns.Bound(d => d.BA);
+                                                                                        //columns.Bound(d => d.PLANT);
+                                                                                        columns.Bound(d => d.PLANT_NAME);
 
-                                                                                //columns.ForeignKey(d => d.WorkSpaceId, (IEnumerable)ViewBag.WorkspaceList, "WorkspaceId", "Name");
-                                                                                columns.Bound(c => c.Status);
-                                                                    })
-                                                                    //.ToolBar(toolbar =>
-                                                                    //{
-                                                                    //    if (AuthorizationHelper.CanAdd(ViewContext.RouteData.Values["Controller"].ToString()))
-                                                                    //    {
-                                                                    //        toolbar.Template("<a class='k-button k-button-icontext' style='margin:2px;' onclick='onAdd()' href='javascript:void(0)'><span class='k-icon k-i-plus' title='Add'></span>Add</a> ");
-                                                                    //    }
-                                                                    //})
-                                                                    //.Editable(editable =>
-                                                                    //{
-                                                                    //    //editable.Mode(GridEditMode.PopUp).TemplateName("tblCustomer");
-                                                                    //    editable.DisplayDeleteConfirmation("Are you sure you want to delete these customer?");
-                                                                    //    //editable.Window(x => x.Title("Manage Customer"));
-                                                                    //})
-                                                                    .Pageable(x =>
-                                                                    {
-                                                                        x.Refresh(true);
-                                                                        x.PageSizes(new int[] { 25, 50, 100, 200, 500 });
-                                                                    })
-                                                                    .Sortable(sortable => sortable.AllowUnsort(false))
-                                                                    .Filterable()
-                                                                    .NoRecords()
-                                                                    .Selectable()
-                                                                    .Events(grid => grid.Change("onGridChange"))
-                                                                    .DataSource(dataSource => dataSource
-                                                                        .Ajax()
-                                                                        .ServerOperation(true)
-                                                                        .PageSize(25)
-                                                                        .Model(model =>
-                                                                        {
-                                                                            model.Id(d => d.ID);
-                                                                        })
-                                                                        .Read(read => read.Action("KendoReadPlant", "Home"))
-                                                                    ))
+                                                                                        //columns.ForeignKey(d => d.WorkSpaceId, (IEnumerable)ViewBag.WorkspaceList, "WorkspaceId", "Name");
+                                                                                        columns.Bound(c => c.Status);
+                                                                            })
+                                                                            //.ToolBar(toolbar =>
+                                                                            //{
+                                                                            //    if (AuthorizationHelper.CanAdd(ViewContext.RouteData.Values["Controller"].ToString()))
+                                                                            //    {
+                                                                            //        toolbar.Template("<a class='k-button k-button-icontext' style='margin:2px;' onclick='onAdd()' href='javascript:void(0)'><span class='k-icon k-i-plus' title='Add'></span>Add</a> ");
+                                                                            //    }
+                                                                            //})
+                                                                            //.Editable(editable =>
+                                                                            //{
+                                                                            //    //editable.Mode(GridEditMode.PopUp).TemplateName("tblCustomer");
+                                                                            //    editable.DisplayDeleteConfirmation("Are you sure you want to delete these customer?");
+                                                                            //    //editable.Window(x => x.Title("Manage Customer"));
+                                                                            //})
+                                                                            .Pageable(x =>
+                                                                            {
+                                                                                x.Refresh(true);
+                                                                                x.PageSizes(new int[] { 25, 50, 100, 200, 500 });
+                                                                            })
+                                                                            .Sortable(sortable => sortable.AllowUnsort(false))
+                                                                            .Filterable()
+                                                                            .NoRecords()
+                                                                            .Selectable()
+                                                                            .Events(grid => grid.Change("onGridChange"))
+                                                                            .DataSource(dataSource => dataSource
+                                                                                .Ajax()
+                                                                                .ServerOperation(true)
+                                                                                .PageSize(25)
+                                                                                .Model(model =>
+                                                                                {
+                                                                                    model.Id(d => d.ID);
+                                                                                })
+                                                                                .Read(read => read.Action("KendoReadPlant", "Home"))
+                                                                            ))
                     </div>
                 </div>
 
                 <div class="col-lg-7">
                     @(Html.Kendo().Grid<FARToBeVerified>()
-                                    .Name("gridFAR")
-                                    .Columns(columns =>
-                                    {
-                                        columns.Select().Width(50);
-                                        columns.Command(command =>
-                                        {
-                                            command.Custom("Preview").Text("<span class='k-icon k-i-print' title='Preview'></span>").HtmlAttributes(new { @style = "margin:2px;" }).Click("onPreview");
-                                        }).Title("Action").Width(50);
-                                        columns.Bound(c => c.Status).Width(100);
-                                        columns.Bound(d => d.AssetIDSubNo).Width(130);
-                                        columns.Bound(d => d.AssetDescription).Width(200);
-                                        columns.Bound(d => d.Process).Width(80);
-                                        columns.Bound(d => d.Product).Width(80);
-                                        columns.Bound(d => d.Pack).Width(80);
-                                        columns.Bound(d => d.EquipmentDetails).Width(100);
-                                        columns.Bound(d => d.InstallationStatus).Width(100);
-                                        columns.Bound(d => d.Remarks).Width(100);
-                                        columns.Bound(d => d.RejectionRemarks).Width(100);
+                                            .Name("gridFAR")
+                                            .Columns(columns =>
+                                            {
+                                                columns.Select().Width(50);
+                                                columns.Command(command =>
+                                                {
+                                                    command.Custom("Preview").Text("<span class='k-icon k-i-print' title='Preview'></span>").HtmlAttributes(new { @style = "margin:2px;" }).Click("onPreview");
+                                                }).Title("Image").Width(70);
+                                                columns.Bound(c => c.Status).Width(100);
+                                                columns.Bound(d => d.AssetIDSubNo).Width(130);
+                                                columns.Bound(d => d.AssetDescription).Width(200);
+                                                columns.Bound(d => d.Process).Width(80);
+                                                columns.Bound(d => d.Product).Width(80);
+                                                columns.Bound(d => d.Pack).Width(80);
+                                                columns.Bound(d => d.EquipmentDetails).Width(100);
+                                                columns.Bound(d => d.InstallationStatus).Width(100);
+                                                columns.Bound(d => d.Remarks).Width(100);
+                                                columns.Bound(d => d.RejectionRemarks).Width(100);
 
-                                    })
+                                            })
 
-                                    .Pageable(x =>
-                                    {
-                                        x.Refresh(true);
-                                        x.PageSizes(new int[] { 25, 50, 100, 200, 500 });
-                                    })
-                                    .Events(x => x.DataBound("onDataGridBound"))
-                                    .Sortable(sortable => sortable.AllowUnsort(true))
-                                    .Filterable()
-                                    .NoRecords()
-                                    .Resizable(resizable => resizable.Columns(true))
-                                    .Scrollable(scrollable => scrollable.Height(560))
-                                    .DataSource(dataSource => dataSource
-                                    .Ajax()
+                                            .Pageable(x =>
+                                            {
+                                                x.Refresh(true);
+                                                x.PageSizes(new int[] { 25, 50, 100, 200, 500 });
+                                            })
+                                            .Events(x => x.DataBound("onDataGridBound"))
+                                            .Sortable(sortable => sortable.AllowUnsort(true))
+                                            .Filterable()
+                                            .NoRecords()
+                                            .Resizable(resizable => resizable.Columns(true))
+                                            .Scrollable(scrollable => scrollable.Height(560))
+                                            .DataSource(dataSource => dataSource
+                                            .Ajax()
 
-                                    .ServerOperation(true)
-                                    .PageSize(25)
-                                    .Model(model =>
-                                    {
-                                        model.Id(d => d.ID);
-                                    })
-                                    .Read(read => read.Action("KendoReadFAR", "Home").Data("onAdditionalData"))
-                                    ))
+                                            .ServerOperation(true)
+                                            .PageSize(25)
+                                            .Model(model =>
+                                            {
+                                                model.Id(d => d.ID);
+                                            })
+                                            .Read(read => read.Action("KendoReadFAR", "Home").Data("onAdditionalData"))
+                                            ))
                 </div>
 
 
