@@ -1,0 +1,199 @@
+﻿@model UserLoginDetail
+@{
+    ViewBag.Title = "Create";
+}
+
+@using (Html.BeginForm("SaveModelData", "UserMaster", FormMethod.Post, new { @class = "form form-horizontal", @id = "validation-form" }))
+{
+    <div class="panel panel-white">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-5">
+                    <h4 class="panel-title">User Details</h4>
+                </div>
+                <div class="col-md-7">
+                    <div class="text-right">
+                        <input type="submit" class="btn btn-info btn-xs legitRipple" value="Save" name="create" />
+                        <input type="submit" class="btn btn-info btn-xs legitRipple" value="Save & Continue" name="create" />
+                        <input type="submit" class="btn btn-info btn-xs legitRipple" value="Save & New" name="create" />
+                        <a href="@Url.Action("Index", "UserMaster")" class="btn btn-info btn-xs legitRipple" tabindex="7">Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    ///////----------------------Basic Info ------------------------//////
+    <div class="panel panel-white">
+        <div class="panel-body">
+
+            @Html.HiddenFor(m => m.ID)
+
+            <div class="row">
+
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Name, new { @class = "col-lg-3 control-label" })
+
+                        <div class="col-lg-9">
+                            @Html.Kendo().TextBoxFor(m => m.Name).HtmlAttributes(new { @tabindex = 1 })
+                            @Html.ValidationMessageFor(m => m.Name)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.LoginID, new { @class = "col-lg-3 control-label" })
+
+                        <div class="col-lg-9">
+                            @Html.Kendo().TextBoxFor(m => m.LoginID).HtmlAttributes(new { @tabindex = 3 })
+                            @Html.ValidationMessageFor(m => m.LoginID)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.MobileNo, new { @class = "col-lg-3 control-label" })
+
+                        <div class="col-lg-9">
+                            @Html.Kendo().TextBoxFor(m => m.MobileNo).HtmlAttributes(new { @tabindex = 5 })
+                            @Html.ValidationMessageFor(m => m.MobileNo)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Country, new { @class = "col-lg-3 control-label " })
+                        <div class="col-lg-9">
+                            @(Html.Kendo().TextBoxFor(m => m.Country)
+                                                                                .HtmlAttributes(new { @tabindex = 7 }))
+                            @Html.ValidationMessageFor(m => m.Country)
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.City, new { @class = "col-lg-3 control-label " })
+                        <div class="col-lg-9">
+                            @(Html.Kendo().TextBoxFor(m => m.City)
+                                                                                .HtmlAttributes(new { @tabindex = 9 }))
+                            @Html.ValidationMessageFor(m => m.City)
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.CompanyCode, new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-9 controls">
+                            @(Html.Kendo().ComboBoxFor(m => m.CompanyCode)
+                                                            .Placeholder("--Select--")
+                                                            .DataTextField("Text")
+                                                            .DataValueField("Value")
+                                                            .BindTo(new List<SelectListItem>() {
+                                                                                                new SelectListItem() {
+                                                                                                  Text = "HUL", Value = "HUL"
+                                                                                                },
+                                                                                                new SelectListItem() {
+                                                                                                  Text = "EY", Value = "EY"
+                                                                                                }
+                                                            })
+                                                            .Suggest(true)
+                                                            .HtmlAttributes(new { style = "width:100%;", @tabindex = 11 })
+
+                            )
+                            @Html.ValidationMessageFor(m => m.CompanyCode)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.Label("Is Active", new { @class = "col-lg-3 control-label" })
+                        <div style="margin-top:10px;" class="col-lg-9">
+                            @Html.Kendo().CheckBoxFor(m => m.IsActive).HtmlAttributes(new { @tabindex = 8 })
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-6">
+
+                    <div class="form-group required">
+                        @Html.LabelFor(m => m.LastName, new { @class = "col-lg-3 control-label " })
+
+                        <div class="col-lg-9">
+                            <div>
+                                @Html.Kendo().TextBoxFor(m => m.LastName).HtmlAttributes(new { @tabindex = 2 })
+                                @Html.ValidationMessageFor(m => m.LastName)
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password, new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-9">
+                            @Html.Kendo().TextBoxFor(m => m.Password).HtmlAttributes(new { @tabindex = 4, @type = "password" })
+                            @Html.ValidationMessageFor(m => m.Password)
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.EmailAddress, new { @class = "col-lg-3 control-label " })
+                        <div class="col-lg-9">
+                            @(Html.Kendo().TextBoxFor(m => m.EmailAddress)
+                                                                .HtmlAttributes(new { @tabindex = 6 })
+                            )
+                            @Html.ValidationMessageFor(m => m.EmailAddress)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.State, new { @class = "col-lg-3 control-label " })
+                        <div class="col-lg-9">
+                            @(Html.Kendo().TextBoxFor(m => m.State).HtmlAttributes(new { @tabindex = 8 }))
+                            @Html.ValidationMessageFor(m => m.State)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.UserType, new { @class = "col-lg-3 control-label" })
+                        <div class="col-lg-9 controls">
+                            @(Html.Kendo().ComboBoxFor(m=>m.UserType)
+                                    .Placeholder("--Select--")
+                                    .DataTextField("Text")
+                                    .DataValueField("Value")
+                                    .BindTo(new List<SelectListItem>() {
+                                                new SelectListItem() {
+                                                  Text = "Admin", Value = "Admin"
+                                                },
+                                                new SelectListItem() {
+                                                  Text = "QC-User", Value = "QC-User"
+                                                },
+                                                new SelectListItem() {
+                                                  Text = "App", Value = "App"
+                                                }
+                                    })
+                                    .Suggest(true)
+                                    .HtmlAttributes(new { style = "width:100%;",@tabindex = 10})
+
+                            )
+
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Gender, new { @class = "col-lg-3 control-label" })
+                        <div style="margin-top:6px;" class="col-lg-9">
+                            @Html.Kendo().RadioButtonFor(m => m.Gender).Value("Male").Label("Male").Checked(true).HtmlAttributes(new { @tabindex = "12" })
+                            @Html.Kendo().RadioButtonFor(m => m.Gender).Value("Female").Label("Female")
+                            @Html.ValidationMessageFor(m => m.Gender)
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    
+}
+

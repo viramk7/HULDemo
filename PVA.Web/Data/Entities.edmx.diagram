@@ -4,9 +4,10 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="38a04803d97945b382cef3ac46d7cb41" Name="Diagram1" ZoomLevel="98">
+      <Diagram DiagramId="38a04803d97945b382cef3ac46d7cb41" Name="Diagram1" ZoomLevel="79">
         <EntityTypeShape EntityType="PhysicalVerification_HUL_NewModel.FARToBeVerified" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PhysicalVerification_HUL_NewModel.PlantAreaMaster" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PhysicalVerification_HUL_NewModel.UserLoginDetail" Width="1.5" PointX="5.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

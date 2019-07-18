@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PhysicalVerification_HUL_NewModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="PhysicalVerification_HUL_NewModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="FARToBeVerified">
           <Key>
             <PropertyRef Name="ID" />
@@ -67,12 +67,65 @@
           <Property Name="SysCreatedDateTime" Type="datetime" />
           <Property Name="SysModifiedDateTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="UserLoginDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserType" Type="varchar" MaxLength="20" />
+          <Property Name="LoginID" Type="varchar" MaxLength="100" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="Country" Type="varchar" MaxLength="50" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="varchar" MaxLength="50" />
+          <Property Name="MobileNo" Type="varchar" MaxLength="20" />
+          <Property Name="LandLineNo" Type="varchar" MaxLength="20" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="100" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="100" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="100" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="EnteredOnMachineID" Type="varchar" MaxLength="50" />
+          <Property Name="ExeVersionNo" Type="varchar" MaxLength="50" />
+          <Property Name="IsApproved" Type="bit" />
+          <Property Name="ApprovedBy" Type="varchar" MaxLength="50" />
+          <Property Name="ApprovedOn" Type="datetime" />
+          <Property Name="ModuleName" Type="varchar" MaxLength="50" />
+          <Property Name="Gender" Type="varchar" MaxLength="10" />
+          <Property Name="Salutation" Type="varchar" MaxLength="10" />
+          <Property Name="FaxNo" Type="varchar" MaxLength="20" />
+          <Property Name="IsEmailAddressVerified" Type="bit" />
+          <Property Name="IsVerificationMailSend" Type="bit" />
+          <Property Name="CircleId" Type="varchar" MaxLength="50" />
+          <Property Name="Zone" Type="varchar" MaxLength="20" />
+          <Property Name="LastQueryDateTime" Type="datetime" />
+          <Property Name="PendingRowsCount" Type="int" />
+          <Property Name="PendingImageCount" Type="int" />
+          <Property Name="ApkVersionNo" Type="varchar" MaxLength="50" />
+          <Property Name="DataSyncDateTime" Type="datetime" />
+          <Property Name="DeviceID" Type="varchar" MaxLength="1000" />
+          <Property Name="Status" Type="varchar" MaxLength="20" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CompanyCode" Type="varchar" MaxLength="50" />
+          <Property Name="APSyncModifiedBy" Type="varchar" MaxLength="50" />
+          <Property Name="RequestedOn" Type="datetime" />
+          <Property Name="RequestedBy" Type="varchar" MaxLength="50" />
+          <Property Name="SysCreatedDateTime" Type="datetime" />
+          <Property Name="SysModifiedDateTime" Type="datetime" />
+          <Property Name="ScanOnly" Type="bit" />
+          <Property Name="ScanOnly2" Type="bit" />
+          <Property Name="MFScanOnly" Type="bit" />
+          <Property Name="PVAgencyName" Type="varchar" MaxLength="50" />
+          <Property Name="isDemoUser" Type="bit" />
+        </EntityType>
         <EntityContainer Name="PhysicalVerification_HUL_NewModelStoreContainer">
           <EntitySet Name="FARToBeVerified" EntityType="Self.FARToBeVerified" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PlantAreaMaster" EntityType="Self.PlantAreaMaster" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserLoginDetails" EntityType="Self.UserLoginDetails" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PhysicalVerification_HUL_NewModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -141,7 +194,61 @@
         <EntityContainer Name="PhysicalVerification_HUL_NewEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="FARToBeVerifieds" EntityType="Self.FARToBeVerified" />
           <EntitySet Name="PlantAreaMasters" EntityType="Self.PlantAreaMaster" />
+          <EntitySet Name="UserLoginDetails" EntityType="PhysicalVerification_HUL_NewModel.UserLoginDetail" />
         </EntityContainer>
+        <EntityType Name="UserLoginDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LoginID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LandLineNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+          <Property Name="EnteredOnMachineID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ExeVersionNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsApproved" Type="Boolean" />
+          <Property Name="ApprovedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ApprovedOn" Type="DateTime" Precision="3" />
+          <Property Name="ModuleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Salutation" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="FaxNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IsEmailAddressVerified" Type="Boolean" />
+          <Property Name="IsVerificationMailSend" Type="Boolean" />
+          <Property Name="CircleId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Zone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LastQueryDateTime" Type="DateTime" Precision="3" />
+          <Property Name="PendingRowsCount" Type="Int32" />
+          <Property Name="PendingImageCount" Type="Int32" />
+          <Property Name="ApkVersionNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DataSyncDateTime" Type="DateTime" Precision="3" />
+          <Property Name="DeviceID" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CompanyCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="APSyncModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RequestedOn" Type="DateTime" Precision="3" />
+          <Property Name="RequestedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SysCreatedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="SysModifiedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ScanOnly" Type="Boolean" />
+          <Property Name="ScanOnly2" Type="Boolean" />
+          <Property Name="MFScanOnly" Type="Boolean" />
+          <Property Name="PVAgencyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="isDemoUser" Type="Boolean" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -209,6 +316,60 @@
                 <ScalarProperty Name="APSyncModifiedBy" ColumnName="APSyncModifiedBy" />
                 <ScalarProperty Name="SysCreatedDateTime" ColumnName="SysCreatedDateTime" />
                 <ScalarProperty Name="SysModifiedDateTime" ColumnName="SysModifiedDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserLoginDetails">
+            <EntityTypeMapping TypeName="PhysicalVerification_HUL_NewModel.UserLoginDetail">
+              <MappingFragment StoreEntitySet="UserLoginDetails">
+                <ScalarProperty Name="isDemoUser" ColumnName="isDemoUser" />
+                <ScalarProperty Name="PVAgencyName" ColumnName="PVAgencyName" />
+                <ScalarProperty Name="MFScanOnly" ColumnName="MFScanOnly" />
+                <ScalarProperty Name="ScanOnly2" ColumnName="ScanOnly2" />
+                <ScalarProperty Name="ScanOnly" ColumnName="ScanOnly" />
+                <ScalarProperty Name="SysModifiedDateTime" ColumnName="SysModifiedDateTime" />
+                <ScalarProperty Name="SysCreatedDateTime" ColumnName="SysCreatedDateTime" />
+                <ScalarProperty Name="RequestedBy" ColumnName="RequestedBy" />
+                <ScalarProperty Name="RequestedOn" ColumnName="RequestedOn" />
+                <ScalarProperty Name="APSyncModifiedBy" ColumnName="APSyncModifiedBy" />
+                <ScalarProperty Name="CompanyCode" ColumnName="CompanyCode" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="DataSyncDateTime" ColumnName="DataSyncDateTime" />
+                <ScalarProperty Name="ApkVersionNo" ColumnName="ApkVersionNo" />
+                <ScalarProperty Name="PendingImageCount" ColumnName="PendingImageCount" />
+                <ScalarProperty Name="PendingRowsCount" ColumnName="PendingRowsCount" />
+                <ScalarProperty Name="LastQueryDateTime" ColumnName="LastQueryDateTime" />
+                <ScalarProperty Name="Zone" ColumnName="Zone" />
+                <ScalarProperty Name="CircleId" ColumnName="CircleId" />
+                <ScalarProperty Name="IsVerificationMailSend" ColumnName="IsVerificationMailSend" />
+                <ScalarProperty Name="IsEmailAddressVerified" ColumnName="IsEmailAddressVerified" />
+                <ScalarProperty Name="FaxNo" ColumnName="FaxNo" />
+                <ScalarProperty Name="Salutation" ColumnName="Salutation" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="ModuleName" ColumnName="ModuleName" />
+                <ScalarProperty Name="ApprovedOn" ColumnName="ApprovedOn" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="ExeVersionNo" ColumnName="ExeVersionNo" />
+                <ScalarProperty Name="EnteredOnMachineID" ColumnName="EnteredOnMachineID" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="LandLineNo" ColumnName="LandLineNo" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="LoginID" ColumnName="LoginID" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

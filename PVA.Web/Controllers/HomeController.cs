@@ -14,7 +14,7 @@ using System.Web.Mvc;
 
 namespace PVA.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         #region private variables
 
