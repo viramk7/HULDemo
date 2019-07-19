@@ -68,6 +68,16 @@ namespace PVA.Web.Controllers
                                     farObj.EquipmentDetails = obj.EquipmentDetails;
                                     farObj.AssetDescription = obj.AssetDescription;
                                     farObj.InstallationStatus = obj.InstallationStatus;
+                                    farObj.Status = "Pending";
+                                    farObj.CreatedBy = "2dfadc7a-2026-4976-8161-900cf3eafae5";
+                                    farObj.CreatedDate = System.DateTime.Now;
+                                    farObj.ModifiedBy= "2dfadc7a-2026-4976-8161-900cf3eafae5";
+                                    farObj.ModifiedDate = System.DateTime.Now;
+                                    farObj.EnteredOnMachineID = "DESKTOP-RVA968U";
+                                    farObj.ExeVersionNo = "v 1.0.1    22-Oct-2019";
+                                    farObj.APSyncModifiedBy = "G";
+                                    farObj.SysCreatedDateTime = System.DateTime.Now;
+                                    farObj.SysModifiedDateTime = System.DateTime.Now;
                                     _dbRepositoryFAR.Insert(farObj);
                                 }
                             }
