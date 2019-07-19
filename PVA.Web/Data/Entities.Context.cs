@@ -27,5 +27,6 @@ namespace PVA.Web.Data
     
         public virtual DbSet<FARToBeVerified> FARToBeVerifieds { get; set; }
         public virtual DbSet<PlantAreaMaster> PlantAreaMasters { get; set; }
+        public virtual DbSet<UserLoginDetail> UserLoginDetails { get; set; }
     }
 }

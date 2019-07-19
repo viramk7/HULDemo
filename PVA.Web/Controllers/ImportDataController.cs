@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace PVA.Web.Controllers
 {
-    public class ImportDataController : Controller
+    public class ImportDataController : BaseController
     {
         #region private variables
 
@@ -28,7 +28,7 @@ namespace PVA.Web.Controllers
         }
         #endregion
 
-        // GET: ImportData
+        #region Methods
         public ActionResult Index()
         {
             return View();
@@ -111,7 +111,6 @@ namespace PVA.Web.Controllers
         }
 
 
-
         public IEnumerable<ExcelImportModel> GetDataFromExcelStockCheck(ExcelWorksheet workSheet, bool firstRowHeader)
         {
             IList<ExcelImportModel> tblItemModel = new List<ExcelImportModel>();
@@ -150,5 +149,6 @@ namespace PVA.Web.Controllers
 
             return tblItemModel;
         }
+        #endregion
     }
 }

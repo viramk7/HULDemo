@@ -180,6 +180,7 @@ function clearAllData(formId) {
 }
 
 function changeStatus(controllerName, action, reloadAction, parameter, message, id, gridId) {
+    debugger;
     var grid = $("#" + gridId).data("kendoGrid");
     bootbox.confirm(message, function (result) {
         if (result === true) {
