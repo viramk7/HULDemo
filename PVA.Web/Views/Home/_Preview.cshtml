@@ -3,13 +3,17 @@
     <div class="row">
         @if (!string.IsNullOrEmpty(Model.ImagePath))
         {
-            <div class="col-md-10">
+            <div class="col-md-5">
                 <img src="@Url.Content(Model.ImagePath)" height="400px" width="auto" />
+            </div><br/>
+
+            <div class="col-md-5">
+                <img src="@Url.Content(Model.BarcodeImagePath)" height="400px" width="auto" />
             </div>
             <br />
             <br />
             <div class="col-md-2">
-                <a href="@Url.Action("DownloadImage","Home", new { path = Model.ImagePath })" class="btn btn-primary">Download</a>
+                <a href="@Url.Action("DownloadImage","Home", new { path = Model.ImagePath, barcodeImagePath = Model.BarcodeImagePath })" class="btn btn-primary">Download</a>
             </div>
         }
     </div>

@@ -42,7 +42,7 @@ namespace PVA.Web.Repository
         {
             using (PhysicalVerification_HUL_NewEntities context = BaseContext.GetDbContext())
             {
-                DbSet<T> table = context.Set<T>();
+                DbSet<T> table = context.Set<T>();  
                 return table.Find(pk);
             }
         }

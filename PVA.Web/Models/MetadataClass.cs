@@ -18,18 +18,25 @@ namespace PVA.Web.Data
             public string UserType { get; set; }
 
             [Display(Name = "Login ID")]
+            [Required(ErrorMessage = "This field is required")]
             public string LoginID { get; set; }
 
             [Display(Name = "Password")]
+            [Required(ErrorMessage = "This field is required")]
             public string Password { get; set; }
 
             [Display(Name = "First Name")]
+            [Required(ErrorMessage = "This field is required")]
             public string Name { get; set; }
 
             [Display(Name = "Last Name")]
             public string LastName { get; set; }
+
+
             public string Country { get; set; }
+
             public string City { get; set; }
+
             public string State { get; set; }
 
             [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Please provide valid mobile number")]
@@ -41,14 +48,17 @@ namespace PVA.Web.Data
             [EmailAddress(ErrorMessage = "Please provide valid email address")]
             //[DataType(DataType.EmailAddress, ErrorMessage ="Please provide valid email address")]
             [Display(Name = "Email Address")]
+            [Required(ErrorMessage = "This field is required")]
             public string EmailAddress { get; set; }
 
+            [Required(ErrorMessage = "This field is required")]
             public string Gender { get; set; }
 
             [Display(Name = "Is Active")]
             public Nullable<bool> IsActive { get; set; }
 
             [Display(Name = "Company Code")]
+            [Required(ErrorMessage = "This field is required")]
             public string CompanyCode { get; set; }
 
 

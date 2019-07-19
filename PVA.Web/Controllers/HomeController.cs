@@ -7,6 +7,7 @@ using PVA.Web.Repository;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -78,6 +79,8 @@ namespace PVA.Web.Controllers
 
         public PartialViewResult ShowPreview(string PlantId, string FARId)
         {
+
+            string globalimagepath = ConfigurationManager.AppSettings["globalImagePath"];
             FARImageModel obj = new FARImageModel();
             if (!string.IsNullOrEmpty(PlantId) && !string.IsNullOrEmpty(FARId))
             {
@@ -87,10 +90,16 @@ namespace PVA.Web.Controllers
                 {
                     obj.PlantName = master.PLANT;
                     obj.ImageName = masterFAR.AssetImage;
+
+                    obj.BarcodeImageName = masterFAR.BarCodeImage;
+
                     if (!string.IsNullOrEmpty(masterFAR.AssetImage))
                     {
-                        string imagePath = string.Format("http://pvapplicationnew.centralus.cloudapp.azure.com/Images/{0}/ComponentImage/{1}", master.PLANT, masterFAR.AssetImage);
+                        string imagePath = string.Format(globalimagepath +"{0}/ComponentImage/{1}", master.PLANT, masterFAR.AssetImage);
                         obj.ImagePath = imagePath;
+
+                        string barcodeImagePath = string.Format(globalimagepath + "{0}/ComponentImage/{1}", master.PLANT, masterFAR.BarCodeImage);
+                        obj.BarcodeImagePath = barcodeImagePath;
                     }
                 }
             }
@@ -98,7 +107,7 @@ namespace PVA.Web.Controllers
             return PartialView("_Preview", obj);
         }
 
-        public ActionResult DownloadImage(string path)
+        public ActionResult DownloadImage(string path, string barcodeImagePath)
         {
             try
             {
@@ -117,8 +126,15 @@ namespace PVA.Web.Controllers
                         byte[] fileBytes = client.DownloadData(path);
                         var response = new FileContentResult(fileBytes, "image/jpeg");
                         response.FileDownloadName = "Image.jpeg";
+
+                        byte[] fileBytesbarcode = client.DownloadData(barcodeImagePath);
+                        var responsebarcode = new FileContentResult(fileBytesbarcode, "image/jpeg");
+                        response.FileDownloadName = "Image.jpeg";
+                        
                         return response;
                     }
+                    
+
 
                 }
                 else

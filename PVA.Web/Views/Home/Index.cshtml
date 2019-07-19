@@ -76,50 +76,7 @@
                                                                         })
                                                                         .Read(read => read.Action("KendoReadPlant", "Home"))
                                                                     ))
-                                                                                      
-                                     .Name("grid")
-                                     .Columns(columns =>
-                                     {
-                                         columns.Bound(d => d.BA);
-                                                 //columns.Bound(d => d.PLANT);
-                                                 columns.Bound(d => d.PLANT_NAME);
-                                     
-                                                 //columns.ForeignKey(d => d.WorkSpaceId, (IEnumerable)ViewBag.WorkspaceList, "WorkspaceId", "Name");
-                                                 columns.Bound(c => c.Status);
-                                     })
-                                     //.ToolBar(toolbar =>
-                                     //{
-                                     //    if (AuthorizationHelper.CanAdd(ViewContext.RouteData.Values["Controller"].ToString()))
-                                     //    {
-                                     //        toolbar.Template("<a class='k-button k-button-icontext' style='margin:2px;' onclick='onAdd()' href='javascript:void(0)'><span class='k-icon k-i-plus' title='Add'></span>Add</a> ");
-                                     //    }
-                                     //})
-                                     //.Editable(editable =>
-                                     //{
-                                     //    //editable.Mode(GridEditMode.PopUp).TemplateName("tblCustomer");
-                                     //    editable.DisplayDeleteConfirmation("Are you sure you want to delete these customer?");
-                                     //    //editable.Window(x => x.Title("Manage Customer"));
-                                     //})
-                                     .Pageable(x =>
-                                     {
-                                         x.Refresh(true);
-                                         x.PageSizes(new int[] { 25, 50, 100, 200, 500 });
-                                     })
-                                     .Sortable(sortable => sortable.AllowUnsort(false))
-                                     .Filterable()
-                                     .NoRecords()
-                                     .Selectable()
-                                     .Events(grid => grid.Change("onGridChange"))
-                                     .DataSource(dataSource => dataSource
-                                         .Ajax()
-                                         .ServerOperation(true)
-                                         .PageSize(25)
-                                         .Model(model =>
-                                         {
-                                             model.Id(d => d.ID);
-                                         })
-                                         .Read(read => read.Action("KendoReadPlant", "Home"))
-                                     ))
+                                 
                     </div>
                 </div>
 

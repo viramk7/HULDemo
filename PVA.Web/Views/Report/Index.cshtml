@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-white">
+            <div class="panel-heading">
+                <h5 class="panel-title">
+                    Report
+                </h5>
+            </div>
+            <div class="panel-body">
+                @(Html.Kendo().Grid<FARToBeVerified>()
+                                                    .Name("gridReport")
+                                                    .Columns(columns =>
+                                                    {
+                                                        columns.Select().Width(50);
+                                                        columns.Command(command =>
+                                                        {
+                                                            command.Custom("Preview").Text("<span class='k-icon k-i-print' title='Preview'></span>").HtmlAttributes(new { @style = "margin:2px;" }).Click("onPreview");
+                                                        }).Title("Image").Width(70);
+                                                        columns.Bound(c => c.Status).Width(100);
+                                                        columns.Bound(d => d.AssetIDSubNo).Width(130);
+                                                        columns.Bound(d => d.AssetDescription).Width(200);
+                                                        columns.Bound(d => d.Process).Width(80);
+                                                        columns.Bound(d => d.Product).Width(80);
+                                                        columns.Bound(d => d.Pack).Width(80);
+                                                        columns.Bound(d => d.EquipmentDetails).Width(100);
+                                                        columns.Bound(d => d.InstallationStatus).Width(100);
+                                                        columns.Bound(d => d.Remarks).Width(100);
+                                                        columns.Bound(d => d.RejectionRemarks).Width(100);
+
+                                                    })
+
+                                                    .Pageable(x =>
+                                                    {
+                                                        x.Refresh(true);
+                                                        x.PageSizes(new int[] { 25, 50, 100, 200, 500 });
+                                                    })
+                                                    .Events(x => x.DataBound("onDataGridBound"))
+                                                    .Sortable(sortable => sortable.AllowUnsort(true))
+                                                    .Filterable()
+                                                    .NoRecords()
+                                                    .AutoBind(false)
+                                                    .Resizable(resizable => resizable.Columns(true))
+                                                    .Scrollable(scrollable => scrollable.Height(560))
+                                                    .DataSource(dataSource => dataSource
+                                                    .Ajax()
+
+                                                    .ServerOperation(true)
+                                                    .PageSize(25)
+                                                    .Model(model =>
+                                                    {
+                                                        model.Id(d => d.ID);
+                                                    })
+                                                    .Read(read => read.Action("KendoReadFAR", "Home").Data("onAdditionalData"))
+                                                    ))
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function onAdditionalData(e) {
+
+        var gview = $("#gridReport").data("kendoGrid");
+        //Getting selected item
+        var selectedItem = gview.dataItem(gview.select());
+
+        if (selectedItem != null) {
+            return {
+                plantid: selectedItem.ID
+            }
+        }
+        else {
+            return {
+                plantid: null
+            }
+        }
+    }
+
+</script>
+

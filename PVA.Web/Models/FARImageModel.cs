@@ -10,5 +10,8 @@ namespace PVA.Web.Models
         public string PlantName { get; set; }
         public string ImageName { get; set; }
         public string ImagePath { get; set; }
+
+        public string BarcodeImageName { get; set; }
+        public string BarcodeImagePath { get; set; }
     }
 }
