@@ -2,6 +2,8 @@
 @{
     ViewBag.Title = "Index";
 }
+<script src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.4.0/jszip.min.js"></script>
+
 <div class="row">
     <div class="col-xs-12">
         <div class="panel panel-white">
@@ -10,67 +12,112 @@
                     Report
                 </h5>
             </div>
+
             <div class="panel-body">
-                @(Html.Kendo().Grid<FARToBeVerified>()
-                                                    .Name("gridReport")
-                                                    .Columns(columns =>
-                                                    {
-                                                        columns.Select().Width(50);
-                                                        columns.Command(command =>
-                                                        {
-                                                            command.Custom("Preview").Text("<span class='k-icon k-i-print' title='Preview'></span>").HtmlAttributes(new { @style = "margin:2px;" }).Click("onPreview");
-                                                        }).Title("Image").Width(70);
-                                                        columns.Bound(c => c.Status).Width(100);
-                                                        columns.Bound(d => d.AssetIDSubNo).Width(130);
-                                                        columns.Bound(d => d.AssetDescription).Width(200);
-                                                        columns.Bound(d => d.Process).Width(80);
-                                                        columns.Bound(d => d.Product).Width(80);
-                                                        columns.Bound(d => d.Pack).Width(80);
-                                                        columns.Bound(d => d.EquipmentDetails).Width(100);
-                                                        columns.Bound(d => d.InstallationStatus).Width(100);
-                                                        columns.Bound(d => d.Remarks).Width(100);
-                                                        columns.Bound(d => d.RejectionRemarks).Width(100);
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-2">
+                            @Html.Label("Business Area", new { @class = "control-label" })
+                        </div>
+                        <div class="col-md-5">
+                            @(Html.Kendo().ComboBox()
+                                                                          .Name("plantCombo")
+                                                                          .Placeholder("--Select BA --")
+                                                                          .DataTextField("Name")
+                                                                          .DataValueField("Id")
+                                                                          .HtmlAttributes(new { @tabindex = "1" , @style="width:100%"})
+                                                                          .DataSource(source =>
+                                                                          {
+                                                                              source.Read(read =>
+                                                                              {
+                                                                                  read.Action("KendoReadPlanDD", "Report");
+                                                                              });
+                                                                          })
+                                                                          .Filter(FilterType.Contains)
+                                                                          .Events(e => e.Change("onChangePlant"))
+                            )
+                        </div>
+                    </div>
+                </div>
 
-                                                    })
+            </div>
+        </div>
 
-                                                    .Pageable(x =>
-                                                    {
-                                                        x.Refresh(true);
-                                                        x.PageSizes(new int[] { 25, 50, 100, 200, 500 });
-                                                    })
-                                                    .Events(x => x.DataBound("onDataGridBound"))
-                                                    .Sortable(sortable => sortable.AllowUnsort(true))
-                                                    .Filterable()
-                                                    .NoRecords()
-                                                    .AutoBind(false)
-                                                    .Resizable(resizable => resizable.Columns(true))
-                                                    .Scrollable(scrollable => scrollable.Height(560))
-                                                    .DataSource(dataSource => dataSource
-                                                    .Ajax()
+        <div class="panel panel-white">
+            <div class="panel-body">
+                <div class="col-md-12">
+                    @(Html.Kendo().Grid<FARToBeVerified>()
+                              .Name("gridReport")
+                              .Columns(columns =>
+                              {
+                                  columns.Bound(d => d.AssetIDSubNo).Width(130);
 
-                                                    .ServerOperation(true)
-                                                    .PageSize(25)
-                                                    .Model(model =>
-                                                    {
-                                                        model.Id(d => d.ID);
-                                                    })
-                                                    .Read(read => read.Action("KendoReadFAR", "Home").Data("onAdditionalData"))
-                                                    ))
+                                  columns.Bound(d => d.Process).Width(80);
+                                  columns.Bound(d => d.Product).Width(100);
+                                  columns.Bound(d => d.Pack).Width(100);
+                                  columns.Bound(d => d.EquipmentDetails).Width(100);
+                                  columns.Bound(d => d.AssetDescription).Width(200);
+                                  columns.Bound(d => d.Status).Width(100);
+                                  columns.Bound(d => d.Type).Width(100);
+                                  columns.Bound(d => d.CreatedDate).Width(100).Format("{0:dd/MM/yyyy}");
+                                  columns.Bound(d => d.ApprovedOn).Width(100).Format("{0:dd/MM/yyyy}");
+                                  columns.Bound(d => d.SysModifiedDateTime).Width(100).Format("{0:dd/MM/yyyy}");
+                                  columns.Bound(d => d.RejectionRemarks).Width(100);
+                                  columns.Bound(d => d.Remarks).Width(100);
+                                  columns.Bound(d => d.VerifiedOn).Width(100);
+                                  columns.Bound(d => d.VerifiedBy).Width(100);
+                                  columns.Bound(d => d.ApprovedBy).Width(100);
+
+                              })
+
+                              .Pageable(x =>
+                              {
+                                  x.Refresh(true);
+                                  x.PageSizes(new int[] { 25, 50, 100, 200, 500 });
+                              })
+                              .ToolBar(tools => tools.Excel())
+                              .Excel(excel => excel
+                                  .FileName("FAR to be verified")
+                                  .Filterable(true)
+                                  .AllPages(true)
+                                  .ProxyURL(Url.Action("Excel_Export_Save", "Report"))
+                              )
+                              //.Events(x => x.DataBound("onDataGridBound"))
+                              .Sortable(sortable => sortable.AllowUnsort(true))
+                              .Filterable()
+                              .NoRecords()
+                              .AutoBind(false)
+                              .Resizable(resizable => resizable.Columns(true))
+                              .Scrollable(scrollable => scrollable.Height(560))
+                              .DataSource(dataSource => dataSource
+                              .Ajax()
+                              .ServerOperation(true)
+                              .PageSize(25)
+                              .Model(model =>
+                              {
+                                  model.Id(d => d.ID);
+                              })
+                              .Read(read => read.Action("KendoReadFAR", "Report").Data("onAdditionalData"))
+                              ))
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <script type="text/javascript">
+
+    function onChangePlant(e) {
+        $('#gridReport').data('kendoGrid').dataSource.read();
+    }
+
     function onAdditionalData(e) {
 
-        var gview = $("#gridReport").data("kendoGrid");
-        //Getting selected item
-        var selectedItem = gview.dataItem(gview.select());
-
-        if (selectedItem != null) {
+        var dataItemCustomer = $('#plantCombo').data("kendoComboBox");
+        
+        if (dataItemCustomer != undefined) {
             return {
-                plantid: selectedItem.ID
+                plantid: $("#plantCombo").data('kendoComboBox').value()
             }
         }
         else {
